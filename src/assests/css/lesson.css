@@ -1,0 +1,75 @@
+.lesson-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+  
+  .lesson-page__title {
+    margin-top: 0;
+    font-size: 36px;
+    font-weight: 700;
+    color: #444;
+  }
+  
+  .lesson-page__content {
+    margin-top: 40px;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #666;
+  }
+  
+  .lesson-page__multimedia {
+    margin-top: 40px;
+  }
+  
+  .lesson-page__multimedia-title {
+    margin-top: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #444;
+  }
+  
+  .lesson-page__quizzes {
+    margin-top: 40px;
+  }
+  
+  .lesson-page__quizzes-title {
+    margin-top: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #444;
+  }
+  
+  .lesson-page__activities {
+    margin-top: 40px;
+  }
+  
+  .lesson-page__activities-title {
+    margin-top: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #444;
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .lesson-page {
+      padding: 10px;
+    }
+    
+    .lesson-page__title {
+      font-size: 24px;
+    }
+    
+    .lesson-page__content {
+      font-size: 16px;
+    }
+    
+    .lesson-page__multimedia-title,
+    .lesson-page__quizzes-title,
+    .lesson-page__activities-title {
+      font-size: 20px;
+    }
+  }

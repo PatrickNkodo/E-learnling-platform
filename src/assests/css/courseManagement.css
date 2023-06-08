@@ -1,0 +1,112 @@
+.admin-course-management-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    }
+    
+    .admin-course-management-page__title {
+    margin-top: 0;
+    font-size: 36px;
+    font-weight: 700;
+    color: #444;
+    }
+    
+    .admin-course-management-page__form-container {
+    margin-top: 50px;
+    }
+    
+    .admin-course-management-page__form-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #444;
+    margin-top: 0;
+    }
+    
+    .admin-course-management-page__form-label {
+    font-size: 18px;
+    font-weight: 700;
+    color: #444;
+    margin-top: 20px;
+    display: block;
+    }
+    
+    .admin-course-management-page__form-input {
+    font-size: 18px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    margin-top: 10px;
+    }
+    
+    .admin-course-management-page__form-select {
+    font-size: 18px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    margin-top: 10px;
+    }
+    
+    .admin-course-management-page__form-select option:first-of-type {
+    display: none;
+    }
+    
+    .admin-course-management-page__form-button {
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: #0077cc;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    }
+    
+    .admin-course-management-page__course-list {
+    margin-top: 50px;
+    }
+    
+    .admin-course-management-page__list-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #444;
+    margin-top: 0;
+    }
+    
+    .admin-course-management-page__course-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    }
+    
+    .admin-course-management-page__course-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+    }
+    
+    .admin-course-management-page__course-list li:last-of-type {
+    border-bottom: none;
+    }
+    
+    .admin-course-management-page__course-list li span {
+    font-size: 18px;
+    font-weight: 700;
+    color: #444;
+    }
+    
+    .admin-course-management-page__course-list li button {
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: #ff3333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    }
