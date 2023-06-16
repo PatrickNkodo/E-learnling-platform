@@ -91,9 +91,9 @@ const Footer = () => {
           <Col lg="4" md="6">
             <h6 className="fw-bold">Get in Touch</h6>
 
-            <p>Address: Sylhet, Bangladesh</p>
-            <p> Phone: +88 0123456789 </p>
-            <p>Email: example@gmail.com</p>
+            <p>Address: Yaounde, Cameroon</p>
+            <p> Phone: +237 696000000</p>
+            <p>Email: email@gmail.com</p>
           </Col>
           <Col lg="4" md="6">
            <a href="#" className="text-decoration-none"> <h6 className="fw-bold btn btn-dark">Back to top</h6></a>

@@ -9,6 +9,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 section{
   padding-top: 70px;
   padding-bottom: 70px;
@@ -39,10 +40,29 @@ button.btn {
   background: #17bf9e;
   color: #fff;
   padding: 7px 25px;
-  border-radius: 50px;
+  border-radius: 10px;
 }
+button.btn:hover{background:#08a183; color: white;}
 
 i {
   color: #17bf9e;
 }
 .footer{background-color:#adadad;padding:15px 0;}
+.flex{display: flex;}
+.center{justify-content: center;}
+.between{justify-content: space-between;}
+.around{justify-content: space-around;}
+.end{justify-content: flex-end;}
+input:focus{
+  outline: none !important;
+}
+.main-parent{
+  min-height:100vh;
+  display: flex;
+  flex-direction: column;
+}
+.routes{
+  flex-grow: 1;
+}
+section{margin-bottom: 10rem;}
+section:last-child{margin-bottom: 0;}

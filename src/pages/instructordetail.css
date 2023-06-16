@@ -1,0 +1,32 @@
+.instructor-page {
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
+  .instructor{
+    text-align: center;
+  }
+  .instructor img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+  
+  .instructor h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .instructor p {
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: center;
+    color: #333;
+    max-width: 500px;
+  }

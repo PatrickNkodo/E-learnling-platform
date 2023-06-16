@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './login.css'
 
 const LoginPage = ({method}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const redirect=useNavigate()
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: Implement login logic
+    window.location.href='/courses'
   };
   return (
    <section id='login'>
@@ -37,7 +37,7 @@ const LoginPage = ({method}) => {
             required
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" onClick={handleSubmit}>Login</button>
       </form>
       <p>Don't have an account? <b onClick={method}>Register here</b></p>
       <p>Forgot your password? <b>Reset password</b></p>

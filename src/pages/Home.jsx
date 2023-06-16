@@ -1,5 +1,4 @@
 import React, { Fragment, useState} from "react";
-import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import Header from "../components/Header/Header";
 import HeroSection from "../components/Hero-Section/HeroSection";
 import CompanySection from "../components/Company-section/Company";
@@ -21,9 +20,7 @@ const Home = () => {
   const [login,setLogin]=useState(true);
   const switchComponent=()=>{setLogin(!login);}
   return (
-    <BrowserRouter>
     <Fragment>
-      <Header />
       <HeroSection />
       {login?<Login method={switchComponent}/>:<Signup method={switchComponent}/>}
       <AboutUs/>
@@ -32,10 +29,7 @@ const Home = () => {
       <Features />
       <Testimonials />
       <Newsletter />
-      <Footer />
     </Fragment>
-    </BrowserRouter>
   );
 };
-
 export default Home;

@@ -5,24 +5,24 @@ import "./header.css";
 export const navLinks = [
   {
     display: "Home",
-    url: "#home",
+    url: "/#home",
   },
   {
     display: "Login",
-    url: "#login",
+    url: "/#login",
   },
   {
     display: "About",
-    url: "#about",
+    url: "/#about",
   },
 
   {
     display: "Courses",
-    url: "#courses",
+    url: "/#courses",
   },
   {
     display: "Testimonials",
-    url: "#testimonials",
+    url: "/#testimonials",
   },
 ];
 
@@ -47,10 +47,10 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  const menuRef = useRef(null);
   const menuToggle = () => {
     menuRef.current.classList.toggle("active");
   };
-  const menuRef = useRef();
   return (
     <header className={`header ${scrolled?'scrolled':''}`}>
       <Container>

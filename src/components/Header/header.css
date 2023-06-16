@@ -10,6 +10,9 @@
 .scrolled{
   background-color: #17bf9e;
 }
+.scrolled ul li a{
+  color: white;
+}
 .nav__list {
   margin: 0;
   padding: 0;

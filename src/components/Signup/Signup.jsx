@@ -12,8 +12,9 @@ const Signup = ({method}) => {
   };
 
   return (
-    <div className="signup-container">
-      <h2>Sign Up</h2>
+    <section id="signup">
+    <div className="signup">
+    <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name</label>
@@ -59,6 +60,7 @@ const Signup = ({method}) => {
       </form>
       <p>Already have an account? login <b onClick={method}>Here</b></p>
     </div>
+    </section>
   );
 };
 

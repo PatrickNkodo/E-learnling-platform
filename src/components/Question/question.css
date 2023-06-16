@@ -1,0 +1,8 @@
+.question{
+    align-items:stretch;
+    display: flex;
+    flex-grow: 1;
+}
+.question .card{
+    flex: 1;
+}

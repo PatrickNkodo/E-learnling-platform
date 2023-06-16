@@ -1,3 +1,34 @@
+import React, { useState } from "react";
+
+const Question = ({ prompt, options,questionIndex, correctAnswer, handleAnswer }) => {
+    const [selectedAnswer, setSelectedAnswer] = useState(null);
+    const handleAnswerSelect = (event) => {
+      const answer = event.target.value;
+      setSelectedAnswer(answer);
+      handleAnswer(questionIndex,options.indexOf(answer));
+    };
+  
+    return (
+      <div className="col-6">
+        <label>{prompt}</label>
+        {options.map((option, index) => (
+          <div key={index}>
+            <input
+              type="radio"
+              name={prompt}
+              value={option}
+              checked={selectedAnswer === option}
+              onChange={handleAnswerSelect}
+            />
+            {option}
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+export default Question;
+
 
 import React, { useState } from "react";
 import { Row } from "reactstrap";
@@ -71,29 +102,7 @@ const LessonPage = ({ title, content, multimedia, activities }) => {
   const toPrevious = () => {
     alert("Previous lesson");
   };
- const code=`
- import React from 'react';
 
-const MyComponent = () => {
-  const cssCode = '
-    .parent {
-      display: flex;
-      flex: 1;
-    }
-    .child {
-      flex: 1;
-    }
-  ';
-
-  return (
-    <div>
-      <pre>{cssCode}</pre>
-    </div>
-  );
-};
-
-export default MyComponent;
- `
   return (
     <div className="lesson-page">
       <div className="lesson">
@@ -105,10 +114,7 @@ export default MyComponent;
             at natus accusamus sint voluptatem? Accusamus illo tempora ipsa
             debitis praesentium! Cupiditate rerum fugiat corporis illo corrupti
             in quis pariatur facilis possimus accusantium, modi quisquam dolor
-            alias aliquam
-            </p>
-            <h3>Title2</h3>
-            <p>voluptatum repudiandae provident, est dolorum deserunt
+            alias aliquam voluptatum repudiandae provident, est dolorum deserunt
             unde quidem? Commodi impedit sint repellendus laudantium praesentium
             quibusdam, atque amet reiciendis? Tempore neque distinctio incidunt
             cupiditate harum totam perspiciatis inventore omnis, labore porro
@@ -117,10 +123,6 @@ export default MyComponent;
             similique qui ad? Eveniet vero laboriosam ipsum voluptate laborum
             totam.
           </p>
-          <h6>Example</h6>
-          <pre>
-             {code}
-          </pre>
         </div>
         {multimedia && (
           <div className="lesson-page__multimedia">
@@ -143,14 +145,7 @@ export default MyComponent;
             />
           ))}
         </Row>
-        <div className={`flex between ${finishedQuiz?'':'hide'}`}>
-          {score !== null && (
-            <div className="lesson-page__score">
-              <p >
-                You scored {score} out of {quizzes.length}
-              </p>
-            </div>
-          )}
+        <div className="flex end">
          <button
             type="button"
             className="btn btn-dark"
@@ -161,6 +156,13 @@ export default MyComponent;
             Submit
           </button>
         </div>
+        {score !== null && (
+          <div className="lesson-page__score">
+            <p className={`${finishedQuiz?'':'hide'}`}>
+              You scored {score} out of {quizzes.length}
+            </p>
+          </div>
+        )}
       </div>
       <div className="flex around my-2">
         <button className="btn" onClick={toPrevious}>

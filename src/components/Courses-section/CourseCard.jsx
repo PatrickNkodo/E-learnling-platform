@@ -1,5 +1,6 @@
 import React from "react";
-
+import { Link } from 'react-router-dom';
+import Course_detail from '../../pages/Course_detail'
 const CourseCard = (props) => {
   const { imgUrl, title, lesson, students, rating } = props.item;
 
@@ -28,7 +29,7 @@ const CourseCard = (props) => {
           </p>
 
           <p className="enroll d-flex align-items-center gap-1">
-            <a href="#"> Enroll Now</a>
+            <Link to='/coursedetail'>View course</Link>
           </p>
         </div>
       </div>

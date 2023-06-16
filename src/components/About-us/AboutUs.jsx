@@ -11,22 +11,23 @@ const AboutUs = () => {
   useEffect(() => {
     const handleScroll = () => {
       const componentRect = componentRef.current.getBoundingClientRect(); //get dimensions of the item
-      const windowHeight = window.innerHeight;
-
-      //getBoundingCLientRect returns 3 values: top(distance from top of document to top of component),bottom(distance from top of document to bottom of component),height(height of component. ie bottom-top)
-      //if top of component is < windowHeight (window is already going down the component body) && componentRect is >0 (it has a body)
-      if (componentRect.top < windowHeight && componentRect.bottom > 0) {
+      const windowHeight = window.innerHeight; //height of the window. it changes only on window resizing
+      // console.log('Position:'+componentRect.y+'top:'+componentRect.top+'bottom: '+componentRect.bottom+'height:'+componentRect.height+'windowheight:'+windowHeight)
+      //getBoundingCLientRect returns 3 values: top(distance from top of viewport to top of component),bottom(distance from top of viewport to bottom of component),height(height of component. ie bottom-top)
+      // componentRect.top < windowHeight: This checks if the top of the component is < the height of the viewport.(ie part of viewport already accessing the component)
+      // componentRect.bottom > 0: This checks if the bottom of the component is > the top of the viewport, given its top is 0(conponent still on viewport)
+      //an existing positive distance on bottom means that the item is still on view port. once negative, it means it has passed the component. because 
+      if (componentRect.top < windowHeight && componentRect.bottom >0) {
         setIsComponentVisible(true);
-      }
+      }else{setIsComponentVisible(false)}
     };
-
     window.addEventListener("scroll", handleScroll);
 
     // Remove event listener on cleanup
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isComponentVisible]);
 
   return (
     <section id="about" ref={componentRef}>
