@@ -9,6 +9,7 @@ const LoginPage = ({method}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     window.location.href='/courses'
+    localStorage.setItem('auth',true)
   };
   return (
    <section id='login'>

@@ -1,28 +1,55 @@
-import React, { useRef,useState,useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Container } from "reactstrap";
 import "./header.css";
-
 export const navLinks = [
   {
     display: "Home",
-    url: "/#home",
+    url: "#home",
+    key: "ri-home-4-line",
   },
   {
     display: "Login",
-    url: "/#login",
+    url: "#login",
+    key: "ri-login-box-line",
   },
   {
     display: "About",
-    url: "/#about",
+    url: "#about",
+    key: "ri-information-line",
   },
-
   {
     display: "Courses",
-    url: "/#courses",
+    url: "#courses",
+    key: "ri-book-2-line",
   },
   {
     display: "Testimonials",
-    url: "/#testimonials",
+    url: "#testimonials",
+    key: "ri-chat-1-line",
+  },
+];
+
+export const navLinks2 = [
+  {
+    display: "Home",
+    url: "/home",
+    key: "ri-home-4-line",
+  },
+  {
+    display: "My Courses",
+    url: "mycourses",
+    key: "ri-book-2-line",
+  },
+  {
+    display: "Profile",
+    url: "/profile",
+    key: "ri-account-box-line",
+  },
+  {
+    display: "Logout",
+    url: "/ogout",
+    key: "ri-logout-box-r-line",
   },
 ];
 
@@ -52,23 +79,40 @@ const Header = () => {
     menuRef.current.classList.toggle("active");
   };
   return (
-    <header className={`header ${scrolled?'scrolled':''}`}>
+    <header className={`header ${scrolled ? "scrolled" : ""}`}>
       <Container>
         <div className="navigation d-flex align-items-center justify-content-between">
           <div className="logo">
             <h2 className=" d-flex align-items-center gap-1">
-              <i class={`ri-pantone-line ${scrolled && 'text-white'}`}></i> Learners.
+              <i class={`ri-pantone-line ${scrolled && "text-white"}`}></i>{" "}
+              Learners.
             </h2>
           </div>
 
           <div className="nav d-flex align-items-center gap-5">
             <div className="nav__menu" ref={menuRef} onClick={menuToggle}>
               <ul className="nav__list">
-                {navLinks.map((item, index) => (
-                  <li key={index} className="nav__item">
-                    <a className={`${scrolled?'below':''}`} href={item.url}>{item.display}</a>
-                  </li>
-                ))}
+                {localStorage.getItem("auth")
+                  ? navLinks2.map((item, index) => (
+                      <li key={index} className="nav__item">
+                        <Link
+                          className={`${scrolled ? "below" : ""}`}
+                          to={item.url}
+                        >
+                           <i className={`${item.key} ${scrolled && "text-white"}`}></i><span>{item.display}</span>
+                        </Link>
+                      </li>
+                    ))
+                  : navLinks.map((item, index) => (
+                      <li key={index} className="nav__item">
+                        <a
+                          className={`${scrolled ? "below" : ""}`}
+                          href={item.url}
+                        >
+                           <i className={`${item.key} ${scrolled && "text-white"}`}></i><span>{item.display}</span>
+                        </a>
+                      </li>
+                    ))}
               </ul>
             </div>
           </div>

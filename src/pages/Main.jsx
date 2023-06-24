@@ -2,11 +2,12 @@ import React, { Fragment, useState} from "react";
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import Header from "../components/Header/Header";
 import OurCourses from "../components/Courses-section/OurCourses";
-import Course_detail from "../pages/Course_detail";
-import Enrollsuccess from "../pages/EnrollSuccess";
-import Lesson from "../pages/Lesson";
-import Instructordetail from "../pages/Instructordetail";
 import Footer from "../components/Footer/Footer";
+import Lesson from "./Lesson";
+import Profile from "./Profile";
+import Enrollsuccess from "./EnrollSuccess";
+import Course_detail from "./Course_detail";
+import Instructordetail from "./Instructordetail";
 import Home from "./Home";
 import Error from "./Error";
 
@@ -16,10 +17,11 @@ const Main = () => {
     <BrowserRouter>
    <div className="main-parent">
     <Header/>
-  <div className="routes">
+ <div className="routes">
   <Routes>
     <Route path="/" element={<Home/>} />
-     <Route path="/courses" element={<OurCourses />} />
+     <Route path="/home" element={<OurCourses />} />
+     <Route path="/profile" element={<Profile />} />
      <Route path="/welcome" element={<Enrollsuccess />} />
      <Route path="/coursedetail" element={<Course_detail />} />
      <Route path="/instructor" element={<Instructordetail />} />

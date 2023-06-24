@@ -1,0 +1,98 @@
+.student-profile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 20px;
+    padding: 80px 20px 20px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    min-height: 60vh;
+  }
+  
+  .dashboard {
+    flex: 1;
+    margin-right: 20px;
+    height: 100%;
+  }
+  
+  .dashboard h3 {
+    margin-top: 0;
+  }
+  
+  .dashboard ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .dashboard li {
+    margin-bottom: 10px;
+  }
+  
+  .dashboard a {
+    display: block;
+    padding: 10px;
+    background-color: #eee;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  
+  .dashboard a:hover {
+    background-color: #ddd;
+  }
+  
+  .profile {
+    flex-basis: 70%;
+  }
+  
+  .profile h2 {
+    margin-top: 0;
+  }
+  
+  .profile p {
+    margin-bottom: 10px;
+  }
+  
+  .profile ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .profile li {
+        margin-bottom: 10px;
+    }
+    .student-profile .dashboard ul li a{color: #17bf9e;transition: all .1s ease;}
+    .student-profile .dashboard ul li a:hover{font-weight: bold;;}
+  
+  .profile label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .profile input,
+  .profile select {
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .student-profile button {
+    border: 1px solid #17bf9e;
+    background: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 8px 4px 0 0;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  }
+  
+  .student-profile button:hover {
+    color: white;
+    background-color: #17bf9e;
+  }

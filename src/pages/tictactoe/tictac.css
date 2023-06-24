@@ -1,0 +1,68 @@
+.game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.game-board {
+  width: 300px;
+  height: 300px;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.board-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.square {
+  width: 100px;
+  height: 100px;
+  font-size: 50px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.square:hover {
+  background-color: #ddd;
+}
+
+.winning {
+  background-color: #f99;
+}
+
+.game-info {
+  margin-left: 50px;
+  width: 200px;
+}
+
+.selected {
+  font-weight: bold;
+}
+
+button {
+  margin: 10px;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ddd;
+}
+
+.history {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+} 
