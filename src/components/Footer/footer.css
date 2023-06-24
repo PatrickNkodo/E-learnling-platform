@@ -1,5 +1,9 @@
 .footer {
-  background: rgba(226, 248, 248, 0.664);
+  background: #17bf9e;
+}
+.footer .container p,.footer .container i{color: white;}
+.follows {
+  margin-top: 20px;
 }
 
 .follows span a {
@@ -10,12 +14,16 @@
   margin-right: 15px;
 }
 
-.link__list .link__item {
-  background: transparent;
+.get-in-touch {
+  margin-top: 20px;
 }
 
-.link__list a {
-  text-decoration: none;
-  color: #0a2b1e;
-  font-weight: 500;
+.back-to-top {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.back-to-top .btn {
+  font-size: 14px;
+  padding: 10px 20px;
 }

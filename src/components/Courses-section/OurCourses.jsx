@@ -1,8 +1,8 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import courseImg1 from "../../assests/images/web-design.png";
-import courseImg2 from "../../assests/images/graphics-design.png";
-import courseImg3 from "../../assests/images/ui-ux.png";
+import courseImg2 from "../../assests/images/Graphic.jpg";
+import courseImg3 from "../../assests/images/ui-ux.jpeg";
 import "./courses.css";
 import CourseCard from "./CourseCard";
 
@@ -39,14 +39,14 @@ const Courses = () => {
   return (
     <section id="courses">
       <Container>
-        <Row style={{alignItems:"end"}}>
+        <Row style={{ alignItems: "end" }}>
           <Col lg="12" className="mb-5">
             <div className="course__top d-flex justify-content-between align-items-center">
               <div className="course__top__left w-50">
                 <h2>Our Courses</h2>
                 <p>
-                Start, redirect or advance your career with our courses.<br/>
-                We provide you means to learn some key courses which will boost your CV
+                  Start, redirect or advance your career with our courses.<br />
+                  We provide you means to learn some key courses which will boost your CV
                 </p>
               </div>
             </div>

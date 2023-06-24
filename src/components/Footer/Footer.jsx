@@ -1,6 +1,5 @@
 import React from "react";
-import { Container, Row, Col, ListGroup, ListGroupItem } from "reactstrap";
-import { navLinks } from "../Header/Header";
+import { Container, Row, Col } from "reactstrap";
 
 import "./footer.css";
 
@@ -50,53 +49,56 @@ const Footer = () => {
   return (
     <footer className="footer">
       <Container>
-        <Row className="d-flex justify-content-between ms-5">
-          <Col lg="4" md="6">
-            <h2 className=" d-flex align-items-center gap-1">
-              <i class="ri-pantone-line"></i> Learners.
+        <Row className="align-items-center justify-content-between">
+          <Col lg="4" md="6" className="mb-4">
+            <h2 className="d-flex align-items-center gap-1">
+              <i className="ri-pantone-line"></i> Learners.
             </h2>
 
             <div className="follows">
               <p className="mb-0">Follow us on social media</p>
-              <span>
-                {" "}
-                <a href="facebook.com">
-                  <i class="ri-facebook-line"></i>
+              <span className="me-1">
+                <a href="https://www.facebook.com">
+                  <i className="ri-facebook-line"></i>
                 </a>
               </span>
 
-              <span>
-                {" "}
-                <a href="facebook.com">
-                  <i class="ri-instagram-line"></i>
+              <span className="me-1">
+                <a href="https://www.instagram.com">
+                  <i className="ri-instagram-line"></i>
                 </a>
               </span>
 
-              <span>
-                {" "}
-                <a href="facebook.com">
-                  <i class="ri-linkedin-line"></i>
+              <span className="me-1">
+                <a href="https://www.linkedin.com">
+                  <i className="ri-linkedin-line"></i>
                 </a>
               </span>
 
-              <span>
-                {" "}
-                <a href="facebook.com">
-                  <i class="ri-twitter-line"></i>
+              <span className="me-1">
+                <a href="https://www.twitter.com">
+                  <i className="ri-twitter-line"></i>
                 </a>
               </span>
             </div>
           </Col>
 
-          <Col lg="4" md="6">
-            <h6 className="fw-bold">Get in Touch</h6>
+          <Col lg="4" md="6" className="mb-4">
+            <div className="get-in-touch">
+              <h6 className="fw-bold mb-3">Get in Touch</h6>
 
-            <p>Address: Yaounde, Cameroon</p>
-            <p> Phone: +237 696000000</p>
-            <p>Email: email@gmail.com</p>
+              <p className="mb-2">Address: Yaounde, Cameroon</p>
+              <p className="mb-2">Phone: +237 696000000</p>
+              <p className="mb-0">Email: email@gmail.com</p>
+            </div>
           </Col>
-          <Col lg="4" md="6">
-           <a href="#" className="text-decoration-none"> <h6 className="fw-bold btn btn-dark">Back to top</h6></a>
+
+          <Col lg="4" md="6" className="mb-4">
+            <div className="back-to-top">
+              <a href="#" className="btn btn-dark">
+                Back to top
+              </a>
+            </div>
           </Col>
         </Row>
       </Container>

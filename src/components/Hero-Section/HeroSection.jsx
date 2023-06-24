@@ -24,7 +24,7 @@ const HeroSection = () => {
             </div> */}
           </Col>
 
-          <Col lg="6" md="6">
+          <Col lg="6" md="6" className="pt-5">
             <img src={heroImg} alt="" className="w-100 hero__img" />
           </Col>
         </Row>
