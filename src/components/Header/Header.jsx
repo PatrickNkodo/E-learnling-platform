@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { Container } from "reactstrap";
 import "./header.css";
 export const navLinks = [
@@ -48,7 +48,7 @@ export const navLinks2 = [
   },
   {
     display: "Logout",
-    url: "/ogout",
+    url: "#",
     key: "ri-logout-box-r-line",
   },
 ];
@@ -78,6 +78,13 @@ const Header = () => {
   const menuToggle = () => {
     menuRef.current.classList.toggle("active");
   };
+  const redirect=useNavigate()
+
+  const logout=(e)=>{
+    e.preventDefault() // ton prevent default click event
+    localStorage.removeItem('auth');
+    redirect('/')
+  }
   return (
     <header className={`header ${scrolled ? "scrolled" : ""}`}>
       <Container>
@@ -98,6 +105,7 @@ const Header = () => {
                         <Link
                           className={`${scrolled ? "below" : ""}`}
                           to={item.url}
+                          onClick={index == 3 && logout}
                         >
                            <i className={`${item.key} ${scrolled && "text-white"}`}></i><span>{item.display}</span>
                         </Link>

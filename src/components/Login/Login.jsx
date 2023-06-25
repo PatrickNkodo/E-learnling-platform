@@ -8,7 +8,7 @@ const LoginPage = ({method}) => {
   const redirect=useNavigate()
   const handleSubmit = (e) => {
     e.preventDefault();
-    window.location.href='/courses'
+    window.location.href='/home'
     localStorage.setItem('auth',true)
   };
   return (

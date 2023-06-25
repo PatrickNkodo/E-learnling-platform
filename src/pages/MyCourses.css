@@ -1,0 +1,53 @@
+.my-courses-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 90px 20px 20px 20px;
+}
+
+.my-courses-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.my-course-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.my-course-item img {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+}
+.my-course-item .progress{
+  height: 25px;
+  background-color: #ddd;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.my-course-item .progress span {
+  background-color: #17bf9e;
+  height: inherit;
+  position: relative;
+  color: white;
+  line-height: 25px;
+  text-align: center;
+  font-weight: bold;
+}
+.my-course-details{
+  flex-grow: 1;
+}
+.my-course-details h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.my-course-details p {
+  margin: 0;
+  font-size: 16px;
+  color: #666;
+}

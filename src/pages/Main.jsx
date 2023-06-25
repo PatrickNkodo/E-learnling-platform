@@ -7,6 +7,8 @@ import Lesson from "./Lesson";
 import Profile from "./Profile";
 import Enrollsuccess from "./EnrollSuccess";
 import Course_detail from "./Course_detail";
+import MyCourses from "./MyCourses";
+import CreateLesson from "./Createlesson"
 import Instructordetail from "./Instructordetail";
 import Home from "./Home";
 import Error from "./Error";
@@ -25,7 +27,9 @@ const Main = () => {
      <Route path="/welcome" element={<Enrollsuccess />} />
      <Route path="/coursedetail" element={<Course_detail />} />
      <Route path="/instructor" element={<Instructordetail />} />
+     <Route path="/mycourses" element={<MyCourses />} />
      <Route path="/lesson" element={<Lesson />} />
+     <Route path="/createlesson" element={<CreateLesson />} />
      <Route path='*' element={<Error/>} />
    </Routes>
   </div>
