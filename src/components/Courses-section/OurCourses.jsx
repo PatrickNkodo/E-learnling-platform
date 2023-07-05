@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
 import courseImg1 from "../../assests/images/web-design.png";
 import courseImg2 from "../../assests/images/graphics-design.png";
@@ -35,31 +36,33 @@ const coursesData = [
   },
 ];
 
-const Courses = () => {
+const OurCourses = () => {
   return (
     <section id="courses">
       <Container>
-        <Row style={{alignItems:"end"}}>
+        <Row style={{ alignItems: "end" }}>
           <Col lg="12" className="mb-5">
             <div className="course__top d-flex justify-content-between align-items-center">
               <div className="course__top__left w-50">
                 <h2>Our Courses</h2>
                 <p>
-                Start, redirect or advance your career with our courses.<br/>
-                We provide you means to learn some key courses which will boost your CV
+                  Start, redirect or advance your career with our courses.
+                  <br />
+                  We provide you means to learn some key courses which will
+                  boost your CV
                 </p>
               </div>
             </div>
           </Col>
-          {coursesData.map((item) => (
-            <Col lg="4" md="6" sm="6">
-              <CourseCard key={item.id} item={item} />
-            </Col>
-          ))}
+            {coursesData.map((item) => (
+              <Col lg="4" md="6" sm="6">
+                <Link to='/courseDetail' state={{id:item.id}} style={{textDecoration:'none'}}><CourseCard key={item.id} item={item} /></Link>
+              </Col>
+            ))}
         </Row>
       </Container>
     </section>
   );
 };
 
-export default Courses;
+export default OurCourses;

@@ -1,13 +1,19 @@
-#courses{padding-top:80px;}
 .single__course__item {
   padding: 15px;
+  box-shadow:2px 2px 5px black;/*#17bf9e*/
+  border-radius: 5px;
+  margin-bottom: 1rem;
 }
 
 .course__img img {
   border-radius: 10px;
   margin-bottom: 20px;
 }
-
+#courses .cards a{
+  text-decoration: none;
+  display: flex;
+  align-items: stretch;
+}
 .enroll a {
   text-decoration: none;
   font-weight: 600;

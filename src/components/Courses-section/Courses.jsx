@@ -1,52 +1,50 @@
-import React from "react";
-import { Container, Row, Col } from "reactstrap";
+import React, { useEffect, useState } from "react";
+import {
+  Container,
+  Row,
+  Col,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "reactstrap";
 import courseImg1 from "../../assests/images/web-design.png";
 import courseImg2 from "../../assests/images/graphics-design.png";
 import courseImg3 from "../../assests/images/ui-ux.png";
 import "./courses.css";
-import CourseCard from "./CourseCard";
-
-const coursesData = [
-  {
-    id: "01",
-    title: "Web Design BootCamp-2022 for Beginners",
-    lesson: 5,
-    students: 4,
-    rating: 5,
-    imgUrl: courseImg1,
-  },
-
-  {
-    id: "02",
-    title: "Professional Graphics Design, PhotoShop, Adobe XD, Figma",
-    lesson: 9,
-    students: 6,
-    rating: 10,
-    imgUrl: courseImg2,
-  },
-
-  {
-    id: "03",
-    title: "UI/UX BootCamp for Beginners in 2022",
-    lesson: 6,
-    students: 12,
-    rating: 8,
-    imgUrl: courseImg3,
-  },
-];
+import CourseCard from "./CourseCard1";
+import { useEverywhere } from "../../pages/context";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 const Courses = () => {
+  const redirect = useNavigate();
+  // Set up a state variable to keep track of whether the modal is open or closed
+  const [isOpen, setIsOpen] = React.useState(false);
+  const { fetchProfile } = useEverywhere();
+  const [data, setData] = useState({});
+  const [courses, setCourses] = useState([]);
+  const { fetchCourses } = useEverywhere();
+
+  useEffect(() => {
+    fetchProfile().then((data) => setData(data.user));
+    fetchCourses().then((data) => setCourses(data));
+    setIsOpen(true); // Use the useEffect hook to open the modal when the component mounts
+  }, []);
+
   return (
-    <section id="courses">
+    <div id="courses">
       <Container>
-        <Row style={{alignItems:"end"}}>
+        <Row style={{ alignItems: "end" }}>
           <Col lg="12" className="mb-5">
             <div className="course__top d-flex justify-content-between align-items-center">
               <div className="course__top__left w-50">
                 <h2>Our Popular Courses</h2>
                 <p>
-                Start, redirect or advance your career with our courses.<br/>
-                We provide you means to learn some key courses which will boost your CV
+                  Start, redirect or advance your career with our courses.
+                  <br />
+                  We provide you means to learn some key courses which will
+                  boost your CV
                 </p>
               </div>
 
@@ -55,14 +53,40 @@ const Courses = () => {
               </div>
             </div>
           </Col>
-          {coursesData.map((item) => (
-            <Col lg="4" md="6" sm="6">
-              <CourseCard key={item.id} item={item} />
+          {courses.map((item, i) => (
+            <Col lg="3" md="4" sm="6" className="cards" key={i}>
+              <Link to="/coursedetail" state={item}>
+                <CourseCard key={item._id} item={item} />
+              </Link>
             </Col>
           ))}
         </Row>
+
+        {/* Add the modal component */}
+        <Modal isOpen={isOpen} toggle={() => setIsOpen(!isOpen)}>
+          <ModalHeader toggle={() => setIsOpen(!isOpen)}>
+            Hey {data.name}! Welcome back to Learners!🙂
+          </ModalHeader>
+          <ModalBody>
+            <p>We were waiting for you!</p>
+            <p>
+              Hope you're doing great, and want to continue to progress
+              amazingly with us
+            </p>
+            <img
+              src={courseImg1}
+              alt="Course"
+              className="img-fluid mx-auto d-block"
+            />
+          </ModalBody>
+          <ModalFooter>
+            <button className="btn" onClick={() => redirect("/mycourses")}>
+              Go to my courses
+            </button>
+          </ModalFooter>
+        </Modal>
       </Container>
-    </section>
+    </div>
   );
 };
 

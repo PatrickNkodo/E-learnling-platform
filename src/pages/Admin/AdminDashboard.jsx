@@ -1,43 +1,47 @@
 import React, { useEffect, useState } from "react";
-import "./AdminDashboardPage.css";
+import { Link } from "react-router-dom"; 
+import "./adminDashboard.css";
+import { useEverywhere } from "../context";
 
 const AdminDashboardPage = () => {
-  const [totalUsers, setTotalUsers] = useState(0);
-  const [activeUsers, setActiveUsers] = useState(0);
-  const [inactiveUsers, setInactiveUsers] = useState(0);
+  let [totalAdmins, setTotalAtotalAdmins] = useState(0);
+  let [totalStudents, setTotalStudents] = useState(0);
+  let [totalTeachers, setTotalTeachers] = useState(0);
+  let [totalCourses, setTotalCourses] = useState(0);
+  const [data, setData] = useState([]);
+  const [courses, setCourses] = useState([]);
+  const {allUsers,fetchCourses}=useEverywhere();
 
+  totalTeachers=data.filter(x=>x.userType=='teacher')
+  totalAdmins=data.filter(x=>x.admin==true)
+  totalStudents=data.filter(x=>x.userType=='student')
   useEffect(() => {
-    // Fetch data from API or database
-    // Replace with your own API or database call
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch("/api/users");
-        const data = await response.json();
-        setTotalUsers(data.totalUsers);
-        setActiveUsers(data.activeUsers);
-        setInactiveUsers(data.inactiveUsers);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchUserData();
+      allUsers().then(data=>setData(data))
+      fetchCourses().then(data=>setTotalCourses(data))
   }, []);
 
   return (
     <div className="admin-dashboard-page">
       <h1 className="admin-dashboard-page__title">Admin Dashboard</h1>
+      <div className="admin-dashboard-page__add mb-2">
+          <Link to=''><button className="btn"><i class="ri-user-add-line"></i>Add admin</button></Link>
+      </div>
       <div className="admin-dashboard-page__stats">
         <div className="admin-dashboard-page__stat">
-          <h2 className="admin-dashboard-page__stat-title">Total Users</h2>
-          <p className="admin-dashboard-page__stat-value">{totalUsers}</p>
+          <h2 className="admin-dashboard-page__stat-title">Total Admins</h2>
+          <p className="admin-dashboard-page__stat-value">{totalAdmins.length}</p>
         </div>
         <div className="admin-dashboard-page__stat">
-          <h2 className="admin-dashboard-page__stat-title">Active Users</h2>
-          <p className="admin-dashboard-page__stat-value">{activeUsers}</p>
+          <h2 className="admin-dashboard-page__stat-title">Total Students</h2>
+          <p className="admin-dashboard-page__stat-value">{totalStudents.length}</p>
         </div>
         <div className="admin-dashboard-page__stat">
-          <h2 className="admin-dashboard-page__stat-title">Inactive Users</h2>
-          <p className="admin-dashboard-page__stat-value">{inactiveUsers}</p>
+          <h2 className="admin-dashboard-page__stat-title">Total Teachers</h2>
+          <p className="admin-dashboard-page__stat-value">{totalTeachers.length}</p>
+        </div>
+        <div className="admin-dashboard-page__stat">
+          <h2 className="admin-dashboard-page__stat-title">Total Courses</h2>
+          <p className="admin-dashboard-page__stat-value">{totalCourses.length}</p>
         </div>
       </div>
     </div>

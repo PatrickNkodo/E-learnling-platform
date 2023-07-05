@@ -6,7 +6,15 @@
     margin: 0 auto;
     box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.3);
   }
-  
+  #login small{color: red;font-weight: bold;animation:vibration .4s ease;}
+  @keyframes vibration {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+  }
   #login .login-page h1 {
     font-size: 2rem;
     margin-bottom: 20px;
