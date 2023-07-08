@@ -22,8 +22,8 @@ const LoginPage = ({ method }) => {
         setInvalid(true)
         //console.log("Error",data);
       }else{
-        //console.log(data);
-        localStorage.setItem('admin',data.user.admin)
+        console.log(data);
+        localStorage.setItem('userType',data.user.userType)
         localStorage.setItem('token',data.token)
         redirect('/home')
       }

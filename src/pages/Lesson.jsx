@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Row } from "reactstrap";
 import "./lesson.css";
 import Question from "../components/Question/Question";
+import { useLocation } from "react-router";
 
 const LessonPage = ({ title, content, multimedia, activities }) => {
   const [disabled, setDisabled] = useState(true);
@@ -34,6 +35,8 @@ const LessonPage = ({ title, content, multimedia, activities }) => {
       selected:null
     },
   ]);
+  const location=useLocation(); //useLocation is storing the values
+  const {courseId,lesson}=location.state  //now get the lesson with this id and display
   // function handleAnswerSelect(correctAnswer) {
   function handleAnswerSelect(questionIndex,answerIndex) {
     setQuizzes((prevQuizzes) => {

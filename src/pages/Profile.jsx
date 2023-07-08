@@ -1,22 +1,20 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./profile.css";
+import { useEverywhere } from "./context";
 
 function Profile() {
   const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState("Patrick");
-  const [email, setEmail] = useState("pat@gmail.com");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [gender, setGender] = useState("");
-
-  const courses = [
-    { id: 1, name: "Introduction to React" },
-    { id: 2, name: "Advanced React Techniques" },
-    { id: 3, name: "React Native" },
-  ];
-
-  const [currentPassword, setCurrentPassword] = useState("pat");
+  const [data, setData] = useState({});
+  const [courses, setCourses] = useState([]);
+  const {fetchProfile,mycourses}=useEverywhere()
+  const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const {updateProfile}=useEverywhere();
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -24,35 +22,52 @@ function Profile() {
 
   const handleCancel = () => {
     setIsEditing(false);
-    setName("Patrick");
-    setEmail("pat@gmail.com");
-    setPhoneNumber("");
-    setGender("");
+    fetchData()
+  };
+  const token = localStorage.getItem("token");
+  // console.log({token});
+  const handleSave = async() => {
+    let data;
+    if(isEditing=='password'){
+      setNewPassword(undefined);
+      if (newPassword !== confirmNewPassword) {
+        alert("New password and confirm password do not match");
+        return;
+      }
+      data= await updateProfile({actualPassword:currentPassword, password:newPassword})
+      if(data.success){
+        setIsEditing(false)
+        alert(data.success);
+      }else{ alert(data.error)}
+    }else if(name && email && gender && phoneNumber && isEditing!='password'){
+     data=await updateProfile({name, email,gender,number:phoneNumber})
+     if(data.success){
+      setIsEditing(false);
+      alert(data.success);
+    }else{ alert(data.error)}
+    }
+    await fetchData()
   };
 
-  const handleSave = () => {
-    // TODO: Implement save functionality to update the student's profile data
-    console.log("Saving changes...");
-    setIsEditing(false);
-  };
+  async function fetchData() {
+    let user = await fetchProfile();
+    let courses = await mycourses({});
+    setData(user.user);
+    setCourses(courses);
 
-  const handlePasswordSave = () => {
-    if (currentPassword !== currentPassword) { // Replace with actual logic to check the current password
-      alert("Current password is incorrect");
-      return;
-    }
-    if (newPassword !== confirmNewPassword) {
-      alert("New passwords do not match");
-      return;
-    }
-    // TODO: Implement save functionality to update the student's password
-    alert("Saving password changes...");
+    setName(user.name);
+    setEmail(user.email);
+    setPhoneNumber(user.number);
+    setGender(user.gender);
     setCurrentPassword("");
     setNewPassword("");
     setConfirmNewPassword("");
-    setIsEditing(false)
-  };
+    // setIsEditing(false)
+  }
 
+  useEffect(() => { //create a function in useEffect to call another fxn getting data from an async function call
+    fetchData();
+  }, []);
   return (
     <div className="student-profile">
       <div className="dashboard">
@@ -100,7 +115,7 @@ function Profile() {
               onChange={(e) => setConfirmNewPassword(e.target.value)}
             />
             <br />
-            <button onClick={handlePasswordSave}>Save</button>
+            <button onClick={handleSave}>Save</button>
             <button onClick={() => setIsEditing(false)}>Cancel</button>
           </div>
         ) : isEditing ? (
@@ -145,21 +160,23 @@ function Profile() {
               <option value="other">Other</option>
             </select>
             <br />
-            <button onClick={handlePasswordSave}>Save</button>
-            <button onClick={() => setIsEditing(false)}>Cancel</button>
+            <button onClick={handleSave}>Save</button>
+            <button onClick={handleCancel}>Cancel</button>
           </div>
         ) : (
           <div>
             <h3>View Profile</h3>
-            <p><strong>Name:</strong> {name}</p>
-            <p><strong>Email:</strong> {email}</p>
-            <p><strong>Phone Number:</strong> {phoneNumber ? phoneNumber : "N/A"}</p>
-            <p><strong>Gender:</strong> {gender ? gender : "N/A"}</p>
-            <h4>Courses:</h4>
+            <p><strong>Name:</strong> {data.name}</p>
+            <p><strong>Email:</strong> {data.email}</p>
+            <p><strong>Phone Number:</strong> {data.number ? data.number : "N/A"}</p>
+            <p><strong>Gender:</strong> {data.gender ? data.gender : "N/A"}</p>
+            <h4>My Courses:</h4>
             <ul>
-              {courses.map((course) => (
-                <li key={course.id}>{course.name}</li>
-              ))}
+              {courses.data? (courses.data.map((course,index) => (
+                <li key={course._id}>{course.title}</li>
+              ))):(
+                <h4>You've no courses yet</h4>
+              )}
             </ul>
             <br />
             <button onClick={() => setIsEditing(true)}>Edit Profile</button>

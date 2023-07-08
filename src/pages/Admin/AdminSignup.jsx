@@ -1,12 +1,12 @@
 import { useState } from "react";
-import './signup.css';
+import '../../components/Signup/signup.css';
 import { useEverywhere } from "../../pages/context";
-const Signup = ({method}) => {
+import { useNavigate } from "react-router";
+const AdminSignup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [gender, setGender] = useState("");
-  const [userType, setUserType] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const {createUser}=useEverywhere();
@@ -18,10 +18,10 @@ const Signup = ({method}) => {
       alert("Password and confirm password fields do not match!");
       return;
     }
-    let data = await createUser({name,email,gender,password,number:phone,userType});
+    let data = await createUser({name,email,gender,password,number:phone,userType:'admin'});
     if(data.user){
       alert('Account created successfully!');
-      window.location.reload();
+      window.location.href('/dashboard');
     }else{
       alert('An error occured')
       console.log(data)
@@ -29,7 +29,7 @@ const Signup = ({method}) => {
   };
 
   return (
-    <section id="signup">
+    <section id="signup" className="p-3">
     <div className="signup">
     <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
@@ -95,25 +95,11 @@ const Signup = ({method}) => {
             required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="userType">User type</label>
-          <select
-            type="text"
-            id="userType"
-            value={userType}
-            onChange={(e) => setUserType(e.target.value)}
-            required
-          >
-            <option value="teacher">Teacher</option>
-            <option value="student">Student</option>
-          </select>
-        </div>
         <button type="submit">Sign Up</button>
       </form>
-      <p>Already have an account? login <b onClick={method}>Here</b></p>
     </div>
     </section>
   );
 };
 
-export default Signup;
+export default AdminSignup;

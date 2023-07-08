@@ -1,15 +1,19 @@
-import React from 'react';
-import { Link, redirect, useNavigate, useParams } from 'react-router-dom';
+import React,{useEffect,useState} from 'react';
+import { Link, useNavigate,useLocation} from 'react-router-dom';
 import img from "../assests/images/ui-ux.png";
 import './course_detail.css'
 
 const CourseDetailPage = () => {
-  const { id } = useParams();
+  // const [data,setData]=useState({});
   const redirect=useNavigate();
+  const location = useLocation();
+  const data=location.state
   const course = {
     id: 1,
     title: 'Introduction to React',
-    description: 'Learn the basics of React and build your first web app.',
+    description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis odit quam, repellendus 
+    quaerat nemo aspernatur! Voluptatum aperiam quia, minus labore recusandae eos expedita ducimus eius sed, magnam modi unde et fugit molestiae aspernatur deserunt quod quidem culpa accusamus facere explicabo! 
+    Quos exercitationem necessitatibus consectetur unde non deleniti autem officia ipsa.`,
     instructor: 'Bisso Jerry',
     image: img,
     price: 49.99,
@@ -74,25 +78,26 @@ const CourseDetailPage = () => {
   return (
     <div className="course-detail-page">
      <div className="block1">
-     <h1>{course.title}</h1>
-      <img src={course.image} alt={course.title} />
-      <p>{course.description}</p>
-     <div className="flex">
-        <p className='instructor me-5'>Instructor:<Link to='/instructor'><b>{course.instructor}</b></Link></p>
-        <button className='price btn' onClick={()=>redirect('/lesson')}>Enroll now</button>
+     <h1>{data.title}</h1>
+      <img src={img} alt={course.title} />
+      <p className='instructor'><b>Course Instructor:</b></p>
+      <Link to={{pathname:'/instructor'}} state={{instructor:data.instructorName}}><b>{data.instructorName}</b></Link>
+      <p>{data.description}</p>
+     <div className="flex center">
+        <button className='btn p-3' onClick={()=>redirect('/welcome')}>Enroll now</button>
      </div>
      </div>
      <div className="block2">
      <h2>Lessons</h2>
      <div className="content">
       <ul>
-        {course.lessons.map((lesson,index) => (
-          <li key={lesson.id}>
+        {data.lessons.map(({lessonTitle:title,duration},index) => (
+          <li key={index}>
            <div className="flex between">
-          <h5> {`${index+1}.${lesson.title}.`}</h5>
-            <p>Duration: {lesson.duration}</p>
+          <h5> {`${index+1}.${title.length>40 ? title.slice(0,30)+'...':title}.`}</h5>
+            <p>Duration: {duration}mins</p>
            </div>
-            <p>Video: <a href={lesson.videoUrl}>videoUrl</a></p>
+            <p>Video: <a href={''}>videoUrl</a></p>
           </li>
         ))}
       </ul>

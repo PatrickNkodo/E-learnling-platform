@@ -22,7 +22,7 @@ export const navLinks = [
   },
   {
     display: "Courses",
-    url: "#courses",
+    url: "/courses",
     key: "ri-book-2-line",
   },
   {
@@ -32,7 +32,7 @@ export const navLinks = [
   },
 ];
 
-export const navLinks2 = [
+export const studentNav = [
   {
     display: "Home",
     url: "/home",
@@ -54,11 +54,11 @@ export const navLinks2 = [
     key: "ri-logout-box-r-line",
   },
 ];
-const navLinks3 = [
+const adminNav = [
   {
     display: "Dashboard",
     url: "/admin",
-    key: "ri-user-add-line",
+    key: "ri-dashboard-line",
   },
   {
     display: "View courses",
@@ -76,15 +76,32 @@ const navLinks3 = [
     key: "ri-logout-box-r-line",
   },
 ];
+const teacherNav = [
+  {
+    display: "Dashboard",
+    url: "/teacher",
+    key: "ri-dashboard-line",
+  },
+  {
+    display: "Profile",
+    url: "/profile",
+    key: "ri-account-box-line",
+  },
+  {
+    display: "Logout",
+    url: "#",
+    key: "ri-logout-box-r-line",
+  },
+];
 
 const Header = () => {
   const { fetchProfile } = useEverywhere();
   const [scrolled, setScrolled] = useState(false);
   const location=useLocation()
-  let [admin,setAdmin]=useState()
+  let [userType,setuserType]=useState()
   // Listen for the scroll event on the window
   useEffect(() => {
-    setAdmin(localStorage.getItem('admin'))
+    setuserType(localStorage.getItem('userType'))
     const handleScroll = () => {
       // Check if the user has scrolled past a certain point
       if (window.scrollY > 50) {
@@ -109,7 +126,8 @@ const Header = () => {
     e.preventDefault(); // ton prevent default click event
     localStorage.removeItem("auth");
     localStorage.removeItem("token");
-    localStorage.removeItem("admin");
+    localStorage.removeItem("userType");
+    sessionStorage.removeItem("welcomed");
     window.location.href='/'
   };
   return (
@@ -125,8 +143,8 @@ const Header = () => {
         <div className="nav d-flex align-items-center gap-5">
           <div className="nav__menu" ref={menuRef} onClick={menuToggle}>
             <ul className="nav__list">
-              {admin === 'true'
-                ? navLinks3.map((item, index) => (
+              {userType === 'admin'
+                ? adminNav.map((item, index) => (
                     <li key={index} className="nav__item">
                       <a
                         className={`${scrolled ? "below" : ""}`}
@@ -140,13 +158,28 @@ const Header = () => {
                       </a>
                     </li>
                   ))
-                : admin==='false'
-                ? navLinks2.map((item, index) => (
+                : userType==='student'
+                ? studentNav.map((item, index) => (
                     <li key={index} className="nav__item">
                       <a
                         className={`${scrolled ? "below" : ""}`}
                         href={item.url}
                         onClick={index === 3 ? logout : null}
+                      >
+                        <i
+                          className={`${item.key} ${scrolled && "text-white"}`}
+                        ></i>
+                        <span>{item.display}</span>
+                      </a>
+                    </li>
+                  ))
+                : userType==='teacher'
+                ? teacherNav.map((item, index) => (
+                    <li key={index} className="nav__item">
+                      <a
+                        className={`${scrolled ? "below" : ""}`}
+                        href={item.url}
+                        onClick={index === 2 ? logout : null}
                       >
                         <i
                           className={`${item.key} ${scrolled && "text-white"}`}

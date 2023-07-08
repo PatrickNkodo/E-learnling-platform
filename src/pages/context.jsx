@@ -38,17 +38,29 @@ const Context = ({ children }) => {// Define a component that provides the conte
     let data=await customFetch('/signin',{method:'post',body:{...fields}})
     return data
   }
+  async function createAdminUser(fields){
+    let data=await customFetch('/signin',{method:'post',body:{...fields}})
+    return data
+  }
   async function fetchProfile(){
       let data=await customFetch('/profile',{method:'post'})
       return data;
   }
 
+  async function fetchSingleCourse(_id){
+    let data=await customFetch(`/courses?id=${_id}`,{method:'get'})
+    return data 
+  }
   async function fetchCourses(){
     let data=await customFetch('/courses',{method:'get'})
     return data 
   }
     async function mycourses(){
       let data=await customFetch('/mycourses',{method:'get'})
+      return data
+    }
+    async function teacherCourses(){
+      let data=await customFetch('/mycreatedcourses',{method:'get'})
       return data
     }
     async function allUsers(){
@@ -59,10 +71,22 @@ const Context = ({ children }) => {// Define a component that provides the conte
       let data=await customFetch('/update',{method:'PATCH',body:{...fields}})
       return data;
     }
+    async function createCourse(fields){
+      let data=await customFetch('/addcourse',{method:'post',body:{...fields}})
+      return data;
+    }
+    async function addLesson(fields){
+      let data=await customFetch('/addlesson',{method:'post',body:{...fields}})
+      return data;
+    }
+    async function deleteLesson(fields){
+      let data=await customFetch('/deletelesson',{method:'delete',body:{...fields}})
+      return data;
+    }
 
   // Return the MyContext provider with the customFetch function in its value prop
   return (
-    <MyContext.Provider value={{ customFetch,allUsers,createUser,fetchCourses,fetchProfile,mycourses,updateProfile}}>
+    <MyContext.Provider value={{createCourse,fetchSingleCourse,addLesson,teacherCourses,allUsers,createUser,createAdminUser,fetchCourses,deleteLesson,fetchProfile,mycourses,updateProfile}}>
       {children}
     </MyContext.Provider>
   );

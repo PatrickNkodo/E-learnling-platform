@@ -13,8 +13,8 @@
 }
 
 section{
-  padding-top: 150px;
-  padding-bottom: 70px;
+  padding-top:150px;
+  /* padding-bottom: 70px; */
   /* background-color: red; */
 }
 
@@ -42,9 +42,9 @@ p {
 button.btn {
   background: #17bf9e;
   color: #fff;
-  padding: 7px 25px;
   border-radius: 10px;
 }
+.bg{background: #17bf9e;}
 button.btn:hover{background:#08a183; color: white;}
 
 i {
@@ -63,8 +63,11 @@ input:focus{
   display: flex;
   flex-direction: column;
 }
-.routes{
-  flex-grow: 1;
-}
+
 section{margin-bottom: 10rem;}
 section:last-child{margin-bottom: 0;}
+.routes {
+  flex-grow: 1;
+  margin-top: 80px;
+  position: relative;
+}

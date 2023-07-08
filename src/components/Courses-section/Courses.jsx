@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 const Courses = () => {
   const redirect = useNavigate();
   // Set up a state variable to keep track of whether the modal is open or closed
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState( sessionStorage.getItem('welcomed') ? false : true);
   const { fetchProfile } = useEverywhere();
   const [data, setData] = useState({});
   const [courses, setCourses] = useState([]);
@@ -29,7 +29,7 @@ const Courses = () => {
   useEffect(() => {
     fetchProfile().then((data) => setData(data.user));
     fetchCourses().then((data) => setCourses(data));
-    setIsOpen(true); // Use the useEffect hook to open the modal when the component mounts
+    sessionStorage.setItem('welcomed',true)
   }, []);
 
   return (
@@ -65,7 +65,7 @@ const Courses = () => {
         {/* Add the modal component */}
         <Modal isOpen={isOpen} toggle={() => setIsOpen(!isOpen)}>
           <ModalHeader toggle={() => setIsOpen(!isOpen)}>
-            Hey {data.name}! Welcome back to Learners!🙂
+            Hey {data?.name}! Welcome back to Learners!🙂
           </ModalHeader>
           <ModalBody>
             <p>We were waiting for you!</p>
