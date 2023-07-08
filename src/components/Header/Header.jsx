@@ -22,7 +22,7 @@ export const navLinks = [
   },
   {
     display: "Courses",
-    url: "/courses",
+    url: "#courses",
     key: "ri-book-2-line",
   },
   {

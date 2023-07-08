@@ -1,5 +1,6 @@
 import { useState } from "react";
 import './signup.css';
+import { Row,Col } from "reactstrap";
 import { useEverywhere } from "../../pages/context";
 const Signup = ({method}) => {
   const [name, setName] = useState("");
@@ -33,6 +34,8 @@ const Signup = ({method}) => {
     <div className="signup">
     <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
+        <Row>
+        <Col md={6} lg={6} sm={12}>
         <div className="form-group">
           <label htmlFor="name">Name</label>
           <input
@@ -75,6 +78,8 @@ const Signup = ({method}) => {
             <option value="Female">Female</option>
           </select>
         </div>
+        </Col>
+        <Col md={6} lg={6} sm={12}>
         <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
@@ -108,7 +113,11 @@ const Signup = ({method}) => {
             <option value="student">Student</option>
           </select>
         </div>
-        <button type="submit">Sign Up</button>
+        </Col>
+        </Row>
+       <div className="flex end">
+       <button className="btn" type="submit">Sign Up</button>
+       </div>
       </form>
       <p>Already have an account? login <b onClick={method}>Here</b></p>
     </div>

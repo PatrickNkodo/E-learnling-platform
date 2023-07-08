@@ -65,9 +65,11 @@ const LoginPage = ({ method }) => {
               required
             />
           </div>
-          <button type="submit" onClick={handleSubmit}>
+          <div className="flex end">
+          <button className='btn' type="submit" onClick={handleSubmit}>
             Login
           </button>
+          </div>
         </form>
         <p>
           Don't have an account? <b onClick={method}>Register here</b>

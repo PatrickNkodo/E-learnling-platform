@@ -4,19 +4,22 @@ import "./MyCourses.css";
 import courseImg1 from "../assests/images/web-design.png";
 
 import { useEverywhere } from "./context";
+import { Container } from "reactstrap";
 const MyCoursesPage = () => {
   const [courses,setCourses]=useState('')
   const {mycourses}=useEverywhere();
 useEffect(()=>{
   mycourses().then(courses=>{
     setCourses(courses)
+    console.log(courses);
   });
 },[])
   return (
     <div className="my-courses-container">
+      <Container>
       <h1>My Courses</h1>
       <div className="my-courses-list">
-        {courses.data ? (courses.data.map((course,i) => (
+        {courses?.data ? (courses.data.map((course,i) => (
           <div key={course._id} className="my-course-item">
             <img src={courseImg1} alt={course.title} />
             <div className="my-course-details">
@@ -24,10 +27,10 @@ useEffect(()=>{
               <p>Instructor: {course.instructorName}</p>
               <div className="flex between">
               <p>Progress:</p>
-              <Link to='/lesson' state={{courseId:course._id,lesson:course.studentsEnrolled[0].lessonNumber}}><button className="btn btn-sm p-1">Continue</button></Link>
+              <Link to='/lesson' state={{courseId:course._id,studentId:course.studentsEnrolled[0].studentId}}><button className="btn btn-sm p-1">Continue</button></Link>
               </div>
               <div className="progress">
-                <span style={{width:`${course.progress}%`}}>{course.progress}%</span>
+                <span style={{width:`${course.percentage>0?course.percentage:0}%`}}>{course.percentage>0?`${course.percentage}%`:<b className="text-dark">0%</b>}</span>
               </div>
             </div>
           </div>
@@ -36,6 +39,7 @@ useEffect(()=>{
         (<h4>You have no courses yet</h4>)
         }
       </div>
+      </Container>
     </div>
   );
 };

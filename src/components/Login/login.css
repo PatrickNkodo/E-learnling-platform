@@ -1,12 +1,14 @@
 #login .login-page {
-    display: flex;
+    justify-self: center;
     flex-direction: column;
     align-items: center;
+    min-width: 400px;
     max-width: 500px;
     margin: 0 auto;
     box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.3);
+    padding: 10px;
   }
-  #login small{color: red;font-weight: bold;animation:vibration .4s ease;}
+   #login small{color: red;font-weight: bold;animation:vibration .4s ease;}
   @keyframes vibration {
     0% { transform: translateX(0); }
     20% { transform: translateX(-5px); }
@@ -41,7 +43,7 @@
     max-width: 100%;
   }
   
-  button[type="submit"] {
+  /* button[type="submit"] {
     padding: 10px 20px;
     font-size: 1.2rem;
     background-color: #17bf9e;
@@ -51,7 +53,7 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  
+   */
   
   #login p {
     margin-top: 20px;
@@ -65,4 +67,4 @@
   
   p a:hover {
     text-decoration: underline;
-  }
+  } 

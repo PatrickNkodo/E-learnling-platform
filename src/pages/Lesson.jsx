@@ -1,44 +1,52 @@
-
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Row } from "reactstrap";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import "./lesson.css";
 import Question from "../components/Question/Question";
 import { useLocation } from "react-router";
+import { useEverywhere } from "./context";
 
 const LessonPage = ({ title, content, multimedia, activities }) => {
   const [disabled, setDisabled] = useState(true);
   const [score, setScore] = useState(null);
+  const [lesson, setLesson] = useState({});
   const [finishedQuiz, setFinishedQuiz] = useState(false);
-  const [quizzes,setQuizzes] = useState([
+  const [quizzes, setQuizzes] = useState([
     {
       prompt: "What is the capital of France?",
       options: ["Paris", "London", "Berlin", "Madrid"],
       correctAnswer: 0,
-      selected:null
+      selected: null,
     },
     {
       prompt: "What is the largest country in the world?",
       options: ["Russia", "Canada", "China", "USA"],
       correctAnswer: 0,
-      selected:null
+      selected: null,
     },
     {
       prompt: "What is the highest mountain in the world?",
-      options: ["Mount Everest", "Mount Kilimanjaro", "Mount Fuji", "Mount McKinley"],
+      options: [
+        "Mount Everest",
+        "Mount Kilimanjaro",
+        "Mount Fuji",
+        "Mount McKinley",
+      ],
       correctAnswer: 0,
-      selected:null
+      selected: null,
     },
     {
       prompt: "What is the chemical symbol for gold?",
       options: ["Au", "Ag", "Cu", "Fe"],
       correctAnswer: 0,
-      selected:null
+      selected: null,
     },
   ]);
-  const location=useLocation(); //useLocation is storing the values
-  const {courseId,lesson}=location.state  //now get the lesson with this id and display
+  const { fetchNextLesson } = useEverywhere();
+  const location = useLocation(); //useLocation is storing the values
+  const { courseId, studentId } = location.state;
   // function handleAnswerSelect(correctAnswer) {
-  function handleAnswerSelect(questionIndex,answerIndex) {
+  function handleAnswerSelect(questionIndex, answerIndex) {
     setQuizzes((prevQuizzes) => {
       const newQuizzes = [...prevQuizzes];
       newQuizzes[questionIndex] = {
@@ -50,16 +58,16 @@ const LessonPage = ({ title, content, multimedia, activities }) => {
   }
 
   function handleSubmitQuiz() {
-    setFinishedQuiz(true)
+    setFinishedQuiz(true);
     setDisabled(false);
     let correctAnswers = 0;
     //check for each quiz question if the correct answer was choosen, and calculate score
     quizzes.forEach((quiz) => {
-    if (quiz.correctAnswer === quiz.selected) {
+      if (quiz.correctAnswer === quiz.selected) {
         correctAnswers++;
-    }
+      }
     });
-    setScore(correctAnswers)
+    setScore(correctAnswers);
   }
   const toNext = (e) => {
     if (e.target.classList.contains("disable")) {
@@ -74,56 +82,23 @@ const LessonPage = ({ title, content, multimedia, activities }) => {
   const toPrevious = () => {
     alert("Previous lesson");
   };
- const code=`
- import React from 'react';
 
-const MyComponent = () => {
-  const cssCode = '
-    .parent {
-      display: flex;
-      flex: 1;
-    }
-    .child {
-      flex: 1;
-    }
-  ';
-
-  return (
-    <div>
-      <pre>{cssCode}</pre>
-    </div>
-  );
-};
-
-export default MyComponent;
- `
+  useEffect(() => {
+    fetchNextLesson(courseId, studentId).then((x) => {
+      if (x.data) {
+        setLesson(x.data);
+      } else {
+        alert(x.error);
+      }
+    });
+  }, []);
+  console.log(lesson);
   return (
     <div className="lesson-page">
       <div className="lesson">
-        <h1 className="lesson-page__title">Lesson title</h1>
+        <h1 className="lesson-page__title text-center">{lesson.lessonTitle}</h1>
         <div className="lesson-page__content">
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione
-            neque velit rem nobis repudiandae? Cupiditate distinctio, provident
-            at natus accusamus sint voluptatem? Accusamus illo tempora ipsa
-            debitis praesentium! Cupiditate rerum fugiat corporis illo corrupti
-            in quis pariatur facilis possimus accusantium, modi quisquam dolor
-            alias aliquam
-            </p>
-            <h3>Title2</h3>
-            <p>voluptatum repudiandae provident, est dolorum deserunt
-            unde quidem? Commodi impedit sint repellendus laudantium praesentium
-            quibusdam, atque amet reiciendis? Tempore neque distinctio incidunt
-            cupiditate harum totam perspiciatis inventore omnis, labore porro
-            quaerat repellendus, doloribus nostrum voluptatem iure sint provident
-            iste excepturi. Cupiditate, dolorum excepturi. Repellendus autem
-            similique qui ad? Eveniet vero laboriosam ipsum voluptate laborum
-            totam.
-          </p>
-          <h6>Example</h6>
-          <pre>
-             {code}
-          </pre>
+          <ReactMarkdown>{lesson.lessonContent}</ReactMarkdown>
         </div>
         {multimedia && (
           <div className="lesson-page__multimedia">
@@ -146,20 +121,20 @@ export default MyComponent;
             />
           ))}
         </Row>
-        <div className={`flex between ${finishedQuiz?'':'hide'}`}>
+        <div className={`flex between ${finishedQuiz ? "" : "hide"}`}>
           {score !== null && (
             <div className="lesson-page__score">
-              <p >
+              <p>
                 You scored {score} out of {quizzes.length}
               </p>
             </div>
           )}
-         <button
+          <button
             type="button"
             className="btn btn-dark"
             onClick={handleSubmitQuiz}
             //disable= not when all inputs are !=null (if some inputs are null, disabled=true)
-            disabled={!quizzes.every((quiz) => quiz.selected !== null)} //disabled =true if score 
+            disabled={!quizzes.every((quiz) => quiz.selected !== null)} //disabled =true if score
           >
             Submit
           </button>

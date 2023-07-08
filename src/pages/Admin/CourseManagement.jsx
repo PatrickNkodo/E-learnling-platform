@@ -60,7 +60,7 @@ const AdminCourseManagement = () => {
   };
 
   return (
-    <div className="admin-course-management-page">
+    <div className="admin-course-management-page bg-light">
       <h1 className="admin-course-management-page__title">Course Management</h1>
       <div className="admin-dashboard-page__title mb-2">
         <center>{data.title}</center>

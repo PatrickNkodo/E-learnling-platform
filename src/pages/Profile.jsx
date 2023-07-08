@@ -52,9 +52,9 @@ function Profile() {
   async function fetchData() {
     let user = await fetchProfile();
     let courses = await mycourses({});
-    setData(user.user);
+    // setData(user.user);
     setCourses(courses);
-
+    user=user.user
     setName(user.name);
     setEmail(user.email);
     setPhoneNumber(user.number);
@@ -64,12 +64,11 @@ function Profile() {
     setConfirmNewPassword("");
     // setIsEditing(false)
   }
-
   useEffect(() => { //create a function in useEffect to call another fxn getting data from an async function call
     fetchData();
   }, []);
   return (
-    <div className="student-profile">
+    <div className="student-profile mt-lg-5">
       <div className="dashboard">
         <h3>Dashboard</h3>
         <ul>
@@ -166,10 +165,10 @@ function Profile() {
         ) : (
           <div>
             <h3>View Profile</h3>
-            <p><strong>Name:</strong> {data.name}</p>
-            <p><strong>Email:</strong> {data.email}</p>
-            <p><strong>Phone Number:</strong> {data.number ? data.number : "N/A"}</p>
-            <p><strong>Gender:</strong> {data.gender ? data.gender : "N/A"}</p>
+            <p><strong>Name:</strong> {name}</p>
+            <p><strong>Email:</strong> {email}</p>
+            <p><strong>Phone Number:</strong> {phoneNumber ? phoneNumber : "N/A"}</p>
+            <p><strong>Gender:</strong> {gender ? gender : "N/A"}</p>
             <h4>My Courses:</h4>
             <ul>
               {courses.data? (courses.data.map((course,index) => (

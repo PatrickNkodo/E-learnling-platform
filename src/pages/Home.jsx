@@ -16,7 +16,6 @@ import Testimonials from "../components/Testimonial/Testimonials";
 import Newsletter from "../components/Newsletter/Newsletter";
 import Context from "./context";
 import Footer from "../components/Footer/Footer";
-import ScrollAnimate from "react-scroll-fade-animation"
 
 const Home = () => {
   const [login,setLogin]=useState(true);
@@ -24,8 +23,8 @@ const Home = () => {
   return (
     <Fragment>
       <Context>
-      <ScrollAnimate path={'bottom-bounce'}><HeroSection /></ScrollAnimate>
-      {login?<Login method={switchComponent}/>:<Signup method={switchComponent}/>}
+      <HeroSection />
+       {login?<Login method={switchComponent}/>:<Signup method={switchComponent}/>}
       <AboutUs/>
       <OurCourses />
       <ChooseUs />

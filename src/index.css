@@ -12,12 +12,6 @@
   box-sizing: border-box;
 }
 
-section{
-  padding-top:150px;
-  /* padding-bottom: 70px; */
-  /* background-color: red; */
-}
-
 h1,
 h2,
 h3,
@@ -64,10 +58,25 @@ input:focus{
   flex-direction: column;
 }
 
-section{margin-bottom: 10rem;}
+section{
+  min-height:100vh;
+  background: white;
+  margin: 10rem 0;
+  display: flex;
+  align-items: center;
+}
+.section>div{padding:30px 15px 15px;}
+section{margin-top:80px;}
 section:last-child{margin-bottom: 0;}
 .routes {
+  display: flex;
+  flex-direction: column;
+  align-content: space-evenly;
   flex-grow: 1;
-  margin-top: 80px;
   position: relative;
+  background-image: url('./assests/images/Bg2.jpg'),url('./assests/images/BG\ gif.gif');
+  background-repeat: no-repeat;
+  background-size:contain;
+  background-position: center top,center bottom;
+  background-attachment: fixed;
 }

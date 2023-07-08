@@ -27,9 +27,9 @@ const CourseCard = (props) => {
         </div>
 
         <div className=" d-flex justify-content-between align-items-center">
-          <p className="rating d-flex align-items-center mb-0">
-            <i className="ri-star-fill"></i> {studentsEnrolled.length} Students
-          </p>
+          <span className="rating d-flex align-items-center mb-0">
+            <i className="ri-heart-fill"></i> {studentsEnrolled.length}
+          </span>
 
           <button className=" btn btn-sm enroll d-flex align-items-center gap-1">
             View course

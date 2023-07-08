@@ -25,7 +25,6 @@ const Courses = () => {
   const [data, setData] = useState({});
   const [courses, setCourses] = useState([]);
   const { fetchCourses } = useEverywhere();
-
   useEffect(() => {
     fetchProfile().then((data) => setData(data.user));
     fetchCourses().then((data) => setCourses(data));
@@ -33,13 +32,13 @@ const Courses = () => {
   }, []);
 
   return (
-    <div id="courses">
+    <section id="courses">
       <Container>
         <Row style={{ alignItems: "end" }}>
           <Col lg="12" className="mb-5">
             <div className="course__top d-flex justify-content-between align-items-center">
               <div className="course__top__left w-50">
-                <h2>Our Popular Courses</h2>
+                <h2>Our Courses</h2>
                 <p>
                   Start, redirect or advance your career with our courses.
                   <br />
@@ -55,7 +54,7 @@ const Courses = () => {
           </Col>
           {courses.map((item, i) => (
             <Col lg="3" md="4" sm="6" className="cards" key={i}>
-              <Link to="/coursedetail" state={item}>
+              <Link to="/coursedetail" state={{id:item._id}}>
                 <CourseCard key={item._id} item={item} />
               </Link>
             </Col>
@@ -86,7 +85,7 @@ const Courses = () => {
           </ModalFooter>
         </Modal>
       </Container>
-    </div>
+    </section>
   );
 };
 
