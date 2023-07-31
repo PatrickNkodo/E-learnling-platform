@@ -30,7 +30,7 @@ const AdminSignup = () => {
 
   return (
     <section id="signup" className="p-3">
-    <div className="signup">
+    <div className="signup col-4 p-5" >
     <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -95,7 +95,7 @@ const AdminSignup = () => {
             required
           />
         </div>
-        <button type="submit">Sign Up</button>
+        <button className="btn" type="submit">Sign Up</button>
       </form>
     </div>
     </section>

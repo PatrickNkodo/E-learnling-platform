@@ -18,9 +18,9 @@ import AdminDashboardPage from "./Admin/AdminDashboard";
 import TeacherDashboardPage from "./Admin/TeacherDashboard";
 import DashboardItemDetail from "./Admin/DashboardItemDetail";
 import AdminSignup from "./Admin/AdminSignup";
+import QuizCreator from "./Admin/QuizzCreator";
 
 const Main = () => {
-  const [login,setLogin]=useState(true);
   return (
     <BrowserRouter>
    <div className="main-parent">
@@ -33,6 +33,7 @@ const Main = () => {
      <Route path="/welcome1" element={<Enrollsuccess />} />
      <Route path="/coursedetail" element={<Course_detail />} />
      <Route path="/instructor" element={<Instructordetail />} />
+     <Route path="/quiz" element={<QuizCreator />} />
      <Route path="/mycourses" element={<MyCourses />} />
      <Route path="/welcome" element={<Welcome />} />
      <Route path="/lesson" element={<Lesson />} />
@@ -50,5 +51,4 @@ const Main = () => {
     </BrowserRouter>
   );
 };
-
 export default Main;

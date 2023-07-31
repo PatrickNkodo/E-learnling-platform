@@ -149,4 +149,4 @@
     color: #fff;
     outline: none;
   } */
-  /* .preview>div{white-space: pre-line;} */
+  .preview>.mde-preview-content{overflow-y: scroll;max-height: 80vh;}

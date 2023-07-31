@@ -79,9 +79,9 @@ const Courses = () => {
             />
           </ModalBody>
           <ModalFooter>
-            <button className="btn" onClick={() => redirect("/mycourses")}>
+            {localStorage.getItem('userType') =='student' && <button className="btn" onClick={() => redirect("/mycourses")}>
               Go to my courses
-            </button>
+            </button>}
           </ModalFooter>
         </Modal>
       </Container>

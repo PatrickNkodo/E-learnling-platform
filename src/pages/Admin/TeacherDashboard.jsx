@@ -50,9 +50,9 @@ const TeacherDashboardPage = () => {
     fetchMyCourses()
   }, []);
 
-  const handleStatItemClick = (type) => {
-    setSelectedType(type);
-  };
+  // const handleStatItemClick = (type) => {
+  //   setSelectedType(type);
+  // };
 
 
   return (
@@ -85,6 +85,7 @@ const TeacherDashboardPage = () => {
         <h3 className="text-secondary text-center">You have no courses</h3>
       ) : (
         <div className="table-responsive">
+          <h3>Dispensed Courses</h3>
           <table className="table table-striped table-hover table-bordered">
             <thead className="bg-black text-white">
               <tr>
@@ -98,7 +99,7 @@ const TeacherDashboardPage = () => {
               {currentCourses.map((x,i) => (
                 <tr key={i}>
                   <td>{x.title}</td>
-                  <td>{x.instructorName}</td>
+                  <td>{x.instructorName} (You)</td>
                   <td>{x.numberOfLessons}</td>
                   <td>
                     <Link to='/coursemanagement' state={{id:x._id}}>

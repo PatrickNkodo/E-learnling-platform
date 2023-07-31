@@ -6,93 +6,137 @@ import Question from "../components/Question/Question";
 import { useLocation } from "react-router";
 import { useEverywhere } from "./context";
 
-const LessonPage = ({ title, content, multimedia, activities }) => {
+const LessonPage = ({ multimedia }) => {
   const [disabled, setDisabled] = useState(true);
   const [score, setScore] = useState(null);
   const [lesson, setLesson] = useState({});
-  const [finishedQuiz, setFinishedQuiz] = useState(false);
-  const [quizzes, setQuizzes] = useState([
-    {
-      prompt: "What is the capital of France?",
-      options: ["Paris", "London", "Berlin", "Madrid"],
-      correctAnswer: 0,
-      selected: null,
-    },
-    {
-      prompt: "What is the largest country in the world?",
-      options: ["Russia", "Canada", "China", "USA"],
-      correctAnswer: 0,
-      selected: null,
-    },
-    {
-      prompt: "What is the highest mountain in the world?",
-      options: [
-        "Mount Everest",
-        "Mount Kilimanjaro",
-        "Mount Fuji",
-        "Mount McKinley",
-      ],
-      correctAnswer: 0,
-      selected: null,
-    },
-    {
-      prompt: "What is the chemical symbol for gold?",
-      options: ["Au", "Ag", "Cu", "Fe"],
-      correctAnswer: 0,
-      selected: null,
-    },
-  ]);
-  const { fetchNextLesson } = useEverywhere();
+  const [quiz, setQuiz] = useState([]);
+  const [lastprev, setLastPrev] = useState(false);
+  const [lastNext, setLastNext] = useState(false);
+  const [nextLesson, setNextLesson] = useState({});
+  const [mainLevel, setMainLevel] = useState(null);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const {
+    fetchNextLesson,
+    fetchPrevLesson,
+    fetchActualLesson,
+    saveProgression,
+  } = useEverywhere();
   const location = useLocation(); //useLocation is storing the values
-  const { courseId, studentId } = location.state;
+  let { courseId, actualLesson } = location.state;
   // function handleAnswerSelect(correctAnswer) {
   function handleAnswerSelect(questionIndex, answerIndex) {
-    setQuizzes((prevQuizzes) => {
+    setSelectedAnswer(answerIndex);
+    console.log(questionIndex, answerIndex, "is the data");
+    setQuiz((prevQuizzes) => {
       const newQuizzes = [...prevQuizzes];
+      //newQuizzes[questionIndex] represents the array object to update
       newQuizzes[questionIndex] = {
         ...newQuizzes[questionIndex],
         selected: answerIndex,
       };
       return newQuizzes;
     });
+    // console.log(quiz);
   }
-
+  // console.log(lesson);
   function handleSubmitQuiz() {
-    setFinishedQuiz(true);
     setDisabled(false);
     let correctAnswers = 0;
+    let totalQuestions = 0;
     //check for each quiz question if the correct answer was choosen, and calculate score
-    quizzes.forEach((quiz) => {
+    quiz.forEach((quiz) => {
       if (quiz.correctAnswer === quiz.selected) {
         correctAnswers++;
       }
+      totalQuestions++;
     });
-    setScore(correctAnswers);
+    if (
+      correctAnswers / totalQuestions >= 0.75 ||
+      typeof (correctAnswers / totalQuestions) == "number"
+    ) {
+      setScore(correctAnswers);
+      setQuiz((prev) => {
+        const data = prev.map((x) => {
+          delete x.selected;
+          return x;
+        });
+        saveProgression(lesson._id, lesson.lessonNumber, mainLevel).then(
+          (x) => {
+            if (x.data) {
+              setNextLesson({ ...x.data, last: x.last });
+              return; //console.log('raw data sent ',x);
+            }
+            console.log(x.error);
+          }
+        );
+        return data;
+      });
+      return;
+    }
   }
-  const toNext = (e) => {
+  let check =lesson.lessonNumber === mainLevel + 1 && mainLevel + 2 === nextLesson.lessonNumber + 2;
+  console.log(
+    nextLesson,
+    "index ",
+    mainLevel,
+    "lesson",
+    lesson.lessonNumber,
+    "mainlevel+2=: ",
+    mainLevel + 2,
+    "nextlesson: ",
+    nextLesson.lessonNumber,
+    "validate",
+    check
+  );
+  const toNext = async (e) => {
+    setScore(null);
     if (e.target.classList.contains("disable")) {
-      console.log("yes");
+      console.log("Button is disabled");
       e.preventDefault();
     } else {
-      console.log("no");
-      alert("Next lesson");
+      setLastPrev(false);
+      if (Object.keys(nextLesson).length > 0) {
+        setLesson(nextLesson);
+        actualLesson = nextLesson.lessonNumber;
+        if (nextLesson.last === "next") {
+          setLastNext(true);
+        }
+        setQuiz(nextLesson.quiz);
+        // mainLevel<nextLesson.lessonNumber-1
+      }
+      // let data=await fetchNextLesson(lesson._id,lesson.lessonNumber)
+      // data.data?setLesson(data.data):console.log(data.error);
     }
   };
 
-  const toPrevious = () => {
-    alert("Previous lesson");
+  const toPrevious = async () => {
+    setScore(null);
+    setLastNext(false);
+    const data = await fetchPrevLesson(lesson._id, lesson.lessonNumber);
+    setLesson(data.data);
+    setQuiz(data.data.quiz);
+    if (data.lastPrev === true) {
+      setLastPrev(true);
+    }
   };
-
   useEffect(() => {
-    fetchNextLesson(courseId, studentId).then((x) => {
-      if (x.data) {
+    try {
+      fetchActualLesson(courseId, actualLesson).then((x) => {
         setLesson(x.data);
-      } else {
-        alert(x.error);
-      }
-    });
+        setMainLevel(x.data.lessonNumber - 1);
+        //setQuiz(x.data.quiz)
+        console.log(x);
+        if (x.last === "lastPrev") {
+          setLastPrev(true);
+        } else if (x.last === "lastNext") {
+          setLastNext(true);
+        }
+      });
+    } catch (e) {
+      console.log(e.message);
+    }
   }, []);
-  console.log(lesson);
   return (
     <div className="lesson-page">
       <div className="lesson">
@@ -110,22 +154,29 @@ const LessonPage = ({ title, content, multimedia, activities }) => {
       <div className="lesson-page__quiz">
         <h4 className="lesson-page__quizzes-title">Exercise of the lesson</h4>
         <Row>
-          {quizzes.map((quiz, index) => (
+          {quiz.map((item, index) => (
             <Question
               key={index}
-              prompt={quiz.prompt}
-              options={quiz.options}
-              correctAnswer={quiz.correctAnswer}
+              prompt={item?.questionText}
+              answers={{ ...item.answerOptions }}
+              correctAnswer={item.correctAnswer}
               handleAnswer={handleAnswerSelect}
+              selectedAnswer={item.selected}
               questionIndex={index}
+              selected={item?.selected}
             />
           ))}
         </Row>
-        <div className={`flex between ${finishedQuiz ? "" : "hide"}`}>
+        <div className={"flex between"}>
           {score !== null && (
             <div className="lesson-page__score">
               <p>
-                You scored {score} out of {quizzes.length}
+                You scored {score} out of {quiz.length}.{" "}
+                {score === 3
+                  ? "Good!"
+                  : score === 4
+                  ? "Excellent!"
+                  : "Try again!"}
               </p>
             </div>
           )}
@@ -134,17 +185,21 @@ const LessonPage = ({ title, content, multimedia, activities }) => {
             className="btn btn-dark"
             onClick={handleSubmitQuiz}
             //disable= not when all inputs are !=null (if some inputs are null, disabled=true)
-            disabled={!quizzes.every((quiz) => quiz.selected !== null)} //disabled =true if score
+            disabled={!quiz.every((quiz) => quiz.hasOwnProperty("selected"))}
           >
             Submit
           </button>
         </div>
       </div>
       <div className="flex around my-2">
-        <button className="btn" onClick={toPrevious}>
+        <button className="btn" onClick={toPrevious} disabled={lastprev}>
           Previous
         </button>
-        <button className={`btn ${disabled ? "disable" : ""}`} onClick={toNext}>
+        <button
+          className={`btn ${disabled ? "disable" : ""}`}
+          onClick={toNext}
+          disabled={lastNext}
+        >
           Next
         </button>
       </div>

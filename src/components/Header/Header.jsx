@@ -120,14 +120,15 @@ const Header = () => {
   }, [location]);
   const menuRef = useRef(null);
   const menuToggle = () => {
+    console.log(menuRef);
     menuRef.current.classList.toggle("active");
   };
-  const logout = (e) => {
+  const logout = (e) => { 
     e.preventDefault(); // ton prevent default click event
     localStorage.removeItem("auth");
     localStorage.removeItem("token");
     localStorage.removeItem("userType");
-    sessionStorage.removeItem("welcomed");
+  sessionStorage.removeItem("welcomed");
     window.location.href='/'
   };
   return (

@@ -11,9 +11,9 @@ const MyCoursesPage = () => {
 useEffect(()=>{
   mycourses().then(courses=>{
     setCourses(courses)
-    console.log(courses);
   });
 },[])
+console.log(courses);
   return (
     <div className="my-courses-container">
       <Container>
@@ -27,7 +27,7 @@ useEffect(()=>{
               <p>Instructor: {course.instructorName}</p>
               <div className="flex between">
               <p>Progress:</p>
-              <Link to='/lesson' state={{courseId:course._id,studentId:course.studentsEnrolled[0].studentId}}><button className="btn btn-sm p-1">Continue</button></Link>
+              <Link to='/lesson' state={{courseId:course._id,actualLesson:course.studentsEnrolled[0].level}}><button className="btn btn-sm p-1">Continue</button></Link>
               </div>
               <div className="progress">
                 <span style={{width:`${course.percentage>0?course.percentage:0}%`}}>{course.percentage>0?`${course.percentage}%`:<b className="text-dark">0%</b>}</span>

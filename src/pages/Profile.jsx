@@ -74,7 +74,8 @@ function Profile() {
         <ul>
           <li>
             <a href="#" onClick={handleEdit}>
-              Modify Account Information           </a>
+              Modify Account Information           
+            </a>
           </li>
           <li>
             <a href="#" onClick={() => setIsEditing("password")}>

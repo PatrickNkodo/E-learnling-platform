@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 const DashboardItemDetail = ({ type, onClose }) => {
+  console.log(type);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
 
@@ -29,6 +30,8 @@ const DashboardItemDetail = ({ type, onClose }) => {
   return (
     <div className="admin-dashboard-detail">
       {type[0]?.name ? (
+       <React.Fragment>
+         <h3>{type[0].userType}'s table</h3>
         <table className="table table-bordered table-hover">
           <thead className="bg-dark text-light">
             <tr>
@@ -45,7 +48,7 @@ const DashboardItemDetail = ({ type, onClose }) => {
                 <td>
                   <button
                     onClick={() => handleDeleteUser(user.id)}
-                    className="btn me-2"
+                    className="btn bg-danger text-white me-2"
                   >
                     Delete
                   </button>
@@ -60,8 +63,11 @@ const DashboardItemDetail = ({ type, onClose }) => {
             ))}
           </tbody>
         </table>
+       </React.Fragment>
       ) : (
-        <table className="table table-bordered table-hover">
+        <React.Fragment>
+          <h3>Courses' table</h3>
+          <table className="table table-bordered table-hover">
           <thead className="bg-dark text-light">
             <tr>
               <th>Course</th>
@@ -92,6 +98,7 @@ const DashboardItemDetail = ({ type, onClose }) => {
             ))}
           </tbody>
         </table>
+        </React.Fragment>
       )}
      <div className="flex between">
      <div className="pagination">

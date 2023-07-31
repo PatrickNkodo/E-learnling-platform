@@ -11,7 +11,7 @@ const AdminDashboardPage = () => {
   const [selectedType, setSelectedType] = useState(null);
 
   const totalTeachers = data.filter((x) => x.userType === "teacher");
-  const totalAdmins = data.filter((x) => x.admin === true);
+  const totalAdmins = data.filter((x) => x.userType === "admin");
   const totalStudents = data.filter((x) => x.userType === "student");
   const totalCourses = courses;
 
@@ -28,7 +28,7 @@ const AdminDashboardPage = () => {
     <div className="admin-dashboard-page">
       <h1 className="admin-dashboard-page__title">Admin Dashboard</h1>
       <div className="admin-dashboard-page__add mb-2">
-        <Link to="">
+        <Link to="/adminsignup">
           <button className="btn">
             <i className="ri-user-add-line"></i>Add admin
           </button>
